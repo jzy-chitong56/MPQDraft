@@ -297,11 +297,15 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 				HMODULE hDLL = LoadLibrary(szDLLPath);
 				MPQDraftPatcherPtr MPQDraftPatcher = (MPQDraftPatcherPtr)GetProcAddress(hDLL, "MPQDraftPatcher");
 
-				if (!MPQDraftPatcher(szSpawnPath, szCommandLine, NULL, 
-					NULL, FALSE, 0, NULL, szCurrentDir, &si, 
-					lpStubData->patchTarget.grfFlags, szCurrentDir, 
-					szTargetPath,lpStubData->patchTarget.nShuntCount, 1, 
-					nNumAuxFiles, &lpszMPQNames, pAuxModules))
+				// Determine MPQ count and names based on whether this SEMPQ has an embedded MPQ
+				DWORD nPatchMPQs = lpStubData->bHasMPQ ? 1 : 0;
+				LPCSTR *lplpszMPQNames = lpStubData->bHasMPQ ? &lpszMPQNames : NULL;
+
+				if (!MPQDraftPatcher(szSpawnPath, szCommandLine, NULL,
+					NULL, FALSE, 0, NULL, szCurrentDir, &si,
+					lpStubData->patchTarget.grfFlags, szCurrentDir,
+					szTargetPath,lpStubData->patchTarget.nShuntCount, nPatchMPQs,
+					nNumAuxFiles, lplpszMPQNames, pAuxModules))
 					MessageBox(NULL, "The patch was unsuccessful.", lpStubData->szCustomName, MB_OK | MB_ICONEXCLAMATION);
 
 				bCorrupted = FALSE;

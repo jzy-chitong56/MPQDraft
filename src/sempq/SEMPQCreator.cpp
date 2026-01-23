@@ -49,18 +49,17 @@ bool SEMPQCreator::createSEMPQ(
 		return false;
 	}
 
-	if (params.mpqPath.empty())
+	// MPQ is optional - but if specified, it must exist
+	bool hasMPQ = !params.mpqPath.empty();
+	if (hasMPQ)
 	{
-		errorMessage = "MPQ path is empty";
-		return false;
-	}
-
-	// Check if MPQ file exists
-	DWORD dwAttrib = GetFileAttributes(params.mpqPath.c_str());
-	if (dwAttrib == INVALID_FILE_ATTRIBUTES || (dwAttrib & FILE_ATTRIBUTE_DIRECTORY))
-	{
-		errorMessage = "The MPQ file does not exist: " + params.mpqPath;
-		return false;
+		// Check if MPQ file exists
+		DWORD dwAttrib = GetFileAttributes(params.mpqPath.c_str());
+		if (dwAttrib == INVALID_FILE_ATTRIBUTES || (dwAttrib & FILE_ATTRIBUTE_DIRECTORY))
+		{
+			errorMessage = "The MPQ file does not exist: " + params.mpqPath;
+			return false;
+		}
 	}
 
 	// Step 1: Write stub to SEMPQ
@@ -78,9 +77,18 @@ bool SEMPQCreator::createSEMPQ(
 	if (!writePluginsToSEMPQ(params, progressCallback, cancellationCheck, errorMessage))
 		return false;
 
-	// Step 3: Write MPQ to SEMPQ
-	if (!writeMPQToSEMPQ(params, progressCallback, cancellationCheck, errorMessage))
-		return false;
+	// Step 3: Write MPQ to SEMPQ (only if an MPQ was specified)
+	if (hasMPQ)
+	{
+		if (!writeMPQToSEMPQ(params, progressCallback, cancellationCheck, errorMessage))
+			return false;
+	}
+	else
+	{
+		// Skip MPQ writing, report progress as if it completed
+		if (progressCallback)
+			progressCallback(WRITE_MPQ_INITIAL_PROGRESS, "No MPQ specified, skipping MPQ embedding...\n");
+	}
 
 	// Success!
 	if (progressCallback)
@@ -510,6 +518,7 @@ static STUBDATA* CreateStubDataFromParams(const SEMPQCreationParams& params, std
 	// Set up the basic stub data fields
 	pDataSEMPQ->dwDummy = GetTickCount();
 	pDataSEMPQ->cbSize = nStubSize;
+	pDataSEMPQ->bHasMPQ = params.mpqPath.empty() ? FALSE : TRUE;
 	pDataSEMPQ->patchTarget.grfFlags = params.flags;
 	strncpy(pDataSEMPQ->szCustomName, params.sempqName.c_str(), sizeof(pDataSEMPQ->szCustomName) - 1);
 	pDataSEMPQ->szCustomName[sizeof(pDataSEMPQ->szCustomName) - 1] = '\0';

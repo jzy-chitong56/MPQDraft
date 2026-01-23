@@ -68,7 +68,7 @@ SEMPQIntroPage::SEMPQIntroPage(QWidget *parent)
         "Lords of Magic.</p>"
 
         "<p><b>What is a SEMPQ?</b><br>"
-        "A SEMPQ is a standalone executable that contains an MPQ archive and optional plugins. "
+        "A SEMPQ is a standalone executable that can contain an MPQ archive and/or plugins. "
         "When run, it automatically patches and launches a game with the embedded modifications. "
         "The user does not need to have MPQDraft installed to run a SEMPQ.</p>"
 
@@ -77,7 +77,8 @@ SEMPQIntroPage::SEMPQIntroPage(QWidget *parent)
         "<li>Easy distribution - share a single .exe file with others.</li>"
         "<li>No installation required - recipients just run the file.</li>"
         "<li>Automatic patching - the game is patched and launched in one step.</li>"
-        "<li>Self-contained - includes all necessary MPQ data and plugins.</li>"
+        "<li>Self-contained - includes all necessary MPQ data and/or plugins.</li>"
+        "<li>Flexible - can include just an MPQ, just plugins, or both.</li>"
         "</ul>"
 
         "<p>Click <b>Next</b> to configure your SEMPQ file.</p>")
@@ -134,12 +135,12 @@ SEMPQSettingsPage::SEMPQSettingsPage(QWidget *parent)
 
     // Vertical layout for label and input
     QVBoxLayout *mpqVerticalLayout = new QVBoxLayout();
-    QLabel *mpqLabel = new QLabel(tr("Source MPQ File:"), this);
+    QLabel *mpqLabel = new QLabel(tr("MPQ File to package:"), this);
     mpqVerticalLayout->addWidget(mpqLabel);
 
     QHBoxLayout *mpqInputLayout = new QHBoxLayout();
     mpqPathEdit = new QLineEdit(this);
-    mpqPathEdit->setPlaceholderText(tr("Select the MPQ file to package"));
+    mpqPathEdit->setPlaceholderText(tr("Optional - leave empty for plugins-only SEMPQ"));
     browseMPQButton = new QPushButton(tr("Open &MPQ..."), this);
     connect(browseMPQButton, &QPushButton::clicked, this, &SEMPQSettingsPage::onBrowseMPQClicked);
     connect(mpqPathEdit, &QLineEdit::textChanged, this, &SEMPQSettingsPage::onMPQPathChanged);
@@ -237,8 +238,8 @@ SEMPQSettingsPage::SEMPQSettingsPage(QWidget *parent)
 bool SEMPQSettingsPage::isComplete() const
 {
     // Page is complete if all required fields are non-empty AND valid
+    // Note: MPQ path is optional - SEMPQs can be created with only plugins
     return !sempqNameEdit ->text().trimmed().isEmpty() &&
-           !mpqPathEdit   ->text().trimmed().isEmpty() &&
            !outputPathEdit->text().trimmed().isEmpty() &&
            isMPQPathValid() &&
            isOutputPathValid();
@@ -476,10 +477,12 @@ bool SEMPQSettingsPage::isMPQPathValid() const
 {
     QString mpqPath = mpqPathEdit->text().trimmed();
 
+    // Empty MPQ path is valid - SEMPQs can be created with only plugins
     if (mpqPath.isEmpty()) {
-        return false;
+        return true;
     }
 
+    // If a path is specified, it must exist and be a file
     QFileInfo fileInfo(mpqPath);
     if (!fileInfo.exists() || !fileInfo.isFile()) {
         return false;
@@ -1805,6 +1808,7 @@ SEMPQProgressPage::SEMPQProgressPage(QWidget *parent)
     , cancelRequested(false)
     , worker(nullptr)
     , currentPluginIndex(-1)
+    , hasMPQ(true)
 {
     setTitle(tr("Creating SEMPQ"));
     setSubTitle(tr("Please wait while your SEMPQ file is being created..."));
@@ -1879,6 +1883,7 @@ void SEMPQProgressPage::initializePage()
     creationSuccess  = false;
     cancelRequested  = false;
     resultMessage.clear();
+    hasMPQ = true;  // Default to true, will be updated below
 
     progressBar ->setValue(0);
     percentLabel->setText("0%");
@@ -1887,19 +1892,25 @@ void SEMPQProgressPage::initializePage()
     pluginNames.clear();
     currentPluginIndex = -1;
 
-    // Get the list of plugins from the plugin page
+    // Get the list of plugins from the plugin page and check if MPQ was specified
     for (int i = 0; i < wizard()->pageIds().count(); i++) {
         int pageId = wizard()->pageIds().at(i);
         QWizardPage *page = wizard()->page(pageId);
-        PluginPage *pluginPage = qobject_cast<PluginPage*>(page);
 
+        // Check for plugin page
+        PluginPage *pluginPage = qobject_cast<PluginPage*>(page);
         if (pluginPage) {
             for (const std::string& plugin : pluginPage->getSelectedPluginPaths()) {
                 // Extract just the filename from the full path
                 QFileInfo fileInfo(QString::fromStdString(plugin));
                 pluginNames.append(fileInfo.fileName());
             }
-            break;
+        }
+
+        // Check for settings page to determine if MPQ was specified
+        SEMPQSettingsPage *settingsPage = qobject_cast<SEMPQSettingsPage*>(page);
+        if (settingsPage) {
+            hasMPQ = !settingsPage->getMPQPath().trimmed().isEmpty();
         }
     }
 
@@ -2042,13 +2053,22 @@ void SEMPQProgressPage::rebuildProgressLog(int progress)
         }
     }
 
-    // Step 3: Writing MPQ Data
-    if (progress >= SEMPQCreator::WRITE_FINISHED) { // Done
-        html += QString("<span style='font-weight: bold; color: green;'>%1 %2</span><br>").arg(doneIcon, tr("Writing MPQ Data"));
-    } else if (progress >= SEMPQCreator::WRITE_MPQ_INITIAL_PROGRESS) { // In progress
-        html += QString("<span style='font-style: italic; color: blue;'>%1 %2</span><br>").arg(activeIcon, tr("Writing MPQ Data"));
-    } else { // Not started
-        html += QString("<span style='color: gray;'>%1 %2</span><br>").arg(pendingIcon, tr("Writing MPQ Data"));
+    // Step 3: Writing MPQ Data (or skipping if no MPQ)
+    if (hasMPQ) {
+        if (progress >= SEMPQCreator::WRITE_FINISHED) { // Done
+            html += QString("<span style='font-weight: bold; color: green;'>%1 %2</span><br>").arg(doneIcon, tr("Writing MPQ Data"));
+        } else if (progress >= SEMPQCreator::WRITE_MPQ_INITIAL_PROGRESS) { // In progress
+            html += QString("<span style='font-style: italic; color: blue;'>%1 %2</span><br>").arg(activeIcon, tr("Writing MPQ Data"));
+        } else { // Not started
+            html += QString("<span style='color: gray;'>%1 %2</span><br>").arg(pendingIcon, tr("Writing MPQ Data"));
+        }
+    } else {
+        // No MPQ specified - show as skipped
+        if (progress >= SEMPQCreator::WRITE_MPQ_INITIAL_PROGRESS) { // Done (skipped)
+            html += QString("<span style='font-weight: bold; color: gray;'>%1 %2</span><br>").arg(doneIcon, tr("No MPQ Data (plugins only)"));
+        } else { // Not started
+            html += QString("<span style='color: gray;'>%1 %2</span><br>").arg(pendingIcon, tr("No MPQ Data (plugins only)"));
+        }
     }
 
     progressLog->setHtml(html);

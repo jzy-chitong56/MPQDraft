@@ -220,6 +220,7 @@ private:
     // Progress tracking
     QStringList pluginNames;
     int currentPluginIndex;
+    bool hasMPQ;  // Whether an MPQ file was specified
 
     void updateProgressLog(const QString& text, int progress);
     void rebuildProgressLog(int progress);

@@ -9,6 +9,7 @@
 */
 
 #include "pluginpage.h"
+#include "sempqwizard.h"
 #include "../../dll/PatcherLimits.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -105,10 +106,35 @@ std::vector<MPQDRAFTPLUGINMODULE> PluginPage::getSelectedPluginModules() const
 
 // QWizardPage override. Returns true if the page is complete and the user can proceed.
 // Validates that the selected plugins don't exceed MPQDraft limits.
+// For SEMPQ wizard: also validates that at least one plugin is selected if no MPQ was specified.
 bool PluginPage::isComplete() const
 {
     PluginManager::ValidationResult result = pluginManager->validateSelection(getSelectedPluginPaths());
-    return result.valid;
+    if (!result.valid) {
+        return false;
+    }
+
+    // For SEMPQ wizard: check if we need at least one plugin (when no MPQ is specified)
+    QString windowTitle = wizard()->windowTitle();
+    if (windowTitle.contains("SEMPQ")) {
+        // Find the settings page to check if an MPQ was specified
+        for (int pageId : wizard()->pageIds()) {
+            QWizardPage *page = wizard()->page(pageId);
+            SEMPQSettingsPage *settingsPage = qobject_cast<SEMPQSettingsPage*>(page);
+            if (settingsPage) {
+                QString mpqPath = settingsPage->getMPQPath().trimmed();
+                if (mpqPath.isEmpty()) {
+                    // No MPQ specified - require at least one plugin
+                    if (getSelectedPluginPaths().empty()) {
+                        return false;
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    return true;
 }
 
 void PluginPage::initializePage()
@@ -127,6 +153,9 @@ void PluginPage::initializePage()
         // Patch Wizard - this IS the last page, so change Finish button to "Launch"
         wizard()->setButtonText(QWizard::FinishButton, tr("&Launch"));
     }
+
+    // Validate plugin selection to show any warnings (e.g., no MPQ and no plugins)
+    validatePluginSelection();
 
     QWizardPage::initializePage();
 }
@@ -235,9 +264,31 @@ void PluginPage::validatePluginSelection()
                               .arg(QString::fromStdString(result.errorMessage));
         warningText->setText(errorMsg);
         warningText->show();
-    } else {
-        warningText->hide();
+        return;
     }
+
+    // For SEMPQ wizard: check if we need at least one plugin (when no MPQ is specified)
+    QString windowTitle = wizard()->windowTitle();
+    if (windowTitle.contains("SEMPQ")) {
+        // Find the settings page to check if an MPQ was specified
+        for (int pageId : wizard()->pageIds()) {
+            QWizardPage *page = wizard()->page(pageId);
+            SEMPQSettingsPage *settingsPage = qobject_cast<SEMPQSettingsPage*>(page);
+            if (settingsPage) {
+                QString mpqPath = settingsPage->getMPQPath().trimmed();
+                if (mpqPath.isEmpty() && getSelectedPluginPaths().empty()) {
+                    QString errorMsg = QString("<font color='#d32f2f'><b>Warning:</b> %1</font>")
+                                          .arg(tr("No MPQ specified. At least one MPQ or one plugin must be selected."));
+                    warningText->setText(errorMsg);
+                    warningText->show();
+                    return;
+                }
+                break;
+            }
+        }
+    }
+
+    warningText->hide();
 }
 
 void PluginPage::onItemChanged(QListWidgetItem *item)

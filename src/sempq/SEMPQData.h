@@ -68,6 +68,10 @@ struct STUBDATA
 	// The name of the SEMPQ. Used in error messages and things.
 	char szCustomName[32];
 
+	// Whether this SEMPQ has an embedded MPQ archive.
+	// If FALSE, only plugins will be loaded (no MPQ patching).
+	BOOL bHasMPQ;
+
 	PATCHTARGETEX patchTarget;
 
 	// The actual strings used in PATCHTARGETEX will reside here
