@@ -186,6 +186,21 @@ Note: This may have compatibility issues if the Qt installation uses a different
     - **stub**: This is the SEMPQ stub code which launches the target process and initiates patching (though the patching itself is performed by the patcher DLL).
 
 
+## Translations
+
+The GUI has translations under `src/app/gui/translations`. Feel free to add your own or to improve translations by submitting Pull Requests!
+
+### Using a translation
+
+Make sure the language you want to use has a generated .qm-file next to the executable. Then siply specify the language and the path to the executable, e.g.: `LANGUAGE=sv ./build/MPQDraft-2026-02-04`
+
+### Updating a translation
+
+If you change the source strings in the code, you need to run `lupdate` for each translation: `lupdate src/app/gui -ts src/app/gui/translations/mpqdraft_sv.ts -no-obsolete`
+
+If you update the translations themselves but not the source strings in the code, you just build the program with `cmake --build build` -- this automatically updates the translation files.
+
+
 ## Credits and License
 - [Justin Olbrantz (Quantam), creator of MPQDraft](http://qstuff.blogspot.com/2010/01/bibliography-programming.html).
 - [milestone-dev, for adding CLI and doing a little modernising](https://github.com/milestone-dev/MPQDraft)

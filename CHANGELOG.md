@@ -2,6 +2,17 @@
 
 All notable changes to this project from 2009 and onwards will be documented in this file. Listed are a number of old releases (between 2002-05-25 and 2008-08-21) - but that list is not comprehensive. It is unknown what was changed in those releases.
 
+## 2026-02-04
+
+### Added
+- Swedish translation (AI translated; lightly humanly verified).
+- Korean translation (AI translated; not humanly verified).
+
+### Changed
+- SEMPQs no longer requires that the user provides an MPQ file. Now an MPQ file OR plugins are required.
+
+
+
 ## 2026-01-01
 
 ### Added

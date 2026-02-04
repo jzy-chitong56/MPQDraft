@@ -78,7 +78,6 @@ SEMPQIntroPage::SEMPQIntroPage(QWidget *parent)
         "<li>No installation required - recipients just run the file.</li>"
         "<li>Automatic patching - the game is patched and launched in one step.</li>"
         "<li>Self-contained - includes all necessary MPQ data and/or plugins.</li>"
-        "<li>Flexible - can include just an MPQ, just plugins, or both.</li>"
         "</ul>"
 
         "<p>Click <b>Next</b> to configure your SEMPQ file.</p>")
@@ -254,9 +253,9 @@ bool SEMPQSettingsPage::validatePage()
     if (outputFileInfo.exists()) {
         QMessageBox msgBox(this);
         msgBox.setIcon(QMessageBox::Warning);
-        msgBox.setWindowTitle("File Already Exists");
-        msgBox.setText(QString("The file '%1' already exists.").arg(outputPath));
-        msgBox.setInformativeText("Do you want to overwrite it?");
+        msgBox.setWindowTitle(tr("File Already Exists"));
+        msgBox.setText(QString(tr("The file '%1' already exists.")).arg(outputPath));
+        msgBox.setInformativeText(tr("Do you want to overwrite it?"));
         msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
         msgBox.setDefaultButton(QMessageBox::No);
 

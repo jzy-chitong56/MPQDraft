@@ -10,6 +10,10 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <QIcon>
+#include <QTranslator>
+#include <QLocale>
+#include <QLibraryInfo>
+#include <QDir>
 #include "mainwindow.h"
 
 // Core Qt GUI initialization - used by both standalone and integrated builds
@@ -22,6 +26,36 @@ static int runQtGuiCore(int argc, char *argv[])
     QApplication::setOrganizationName("Team MoPaQ");
     QApplication::setApplicationName("MPQDraft");
     QApplication::setApplicationVersion("1.0");
+
+    // Load Qt's built-in translations for standard dialogs (e.g., QFileDialog)
+    QTranslator qtTranslator;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    if (qtTranslator.load(QLocale(), "qt", "_", QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
+#else
+    if (qtTranslator.load(QLocale(), "qt", "_", QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+#endif
+        app.installTranslator(&qtTranslator);
+    }
+
+    // Load MPQDraft translations
+    QTranslator appTranslator;
+    // Try to load from several locations:
+    // 1. Next to the executable (for deployed apps)
+    // 2. In a translations subdirectory next to the executable
+    // 3. In the build directory (for development)
+    QString translationFile = QString("mpqdraft_%1").arg(QLocale().name().left(2));
+    QStringList searchPaths = {
+        QApplication::applicationDirPath(),
+        QApplication::applicationDirPath() + "/translations",
+        ":/translations"  // Embedded in resources (if added later)
+    };
+
+    for (const QString &path : searchPaths) {
+        if (appTranslator.load(translationFile, path)) {
+            app.installTranslator(&appTranslator);
+            break;
+        }
+    }
 
     // Set the application icon (window and taskbar)
     QIcon appIcon(":/icons/mpqdraft.ico");

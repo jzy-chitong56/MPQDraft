@@ -115,12 +115,12 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 # Find Qt - prefer Qt6, fall back to Qt5
-find_package(Qt6 QUIET COMPONENTS Core Widgets Svg)
+find_package(Qt6 QUIET COMPONENTS Core Widgets Svg LinguistTools)
 if(Qt6_FOUND)
     set(QT_VERSION_MAJOR 6)
     message(STATUS "Using Qt6")
 else()
-    find_package(Qt5 QUIET COMPONENTS Core Widgets Svg)
+    find_package(Qt5 QUIET COMPONENTS Core Widgets Svg LinguistTools)
     if(Qt5_FOUND)
         set(QT_VERSION_MAJOR 5)
         message(STATUS "Using Qt5")
@@ -167,6 +167,22 @@ if(BUILD_GUI)
     endif()
 
     add_executable(MPQDraft WIN32 ${MAIN_SOURCES} app/gui/resources/mpqdraft.qrc)
+
+    # Translation files (automatically detect all .ts files)
+    file(GLOB TS_FILES "${CMAKE_CURRENT_SOURCE_DIR}/app/gui/translations/*.ts")
+
+    # Create .qm files from .ts files
+    if(Qt6_FOUND)
+        qt6_add_translation(QM_FILES ${TS_FILES})
+    else()
+        qt5_add_translation(QM_FILES ${TS_FILES})
+    endif()
+
+    # Add translations to the target
+    target_sources(MPQDraft PRIVATE ${QM_FILES})
+
+    # Install translation files
+    install(FILES ${QM_FILES} DESTINATION translations)
 
     target_include_directories(MPQDraft PRIVATE
         ${COMMON_INCLUDE_DIRS}
