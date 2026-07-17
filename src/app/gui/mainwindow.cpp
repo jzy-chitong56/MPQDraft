@@ -103,10 +103,8 @@ void MainWindow::onLanguageChanged(QAction *action)
     QSettings settings;
     settings.setValue("language/override", code);
 
-    QMessageBox::information(this,
-        tr("Language Changed"),
-        tr("The language change will take effect after restarting the application.\n\n"
-           "Selected: %1").arg(action->text().remove('&')));
+    qApp->quit();
+    QProcess::startDetached(qApp->applicationFilePath(), QStringList());
 }
 
 void MainWindow::setupUI()
