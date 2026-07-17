@@ -62,7 +62,11 @@ jobs:
           Copy-Item -Path "build/Release/MPQDraft-*.exe" -Destination "artifacts/MPQDraft-$date.exe"
 
           # Copy Qt DLLs needed for the application
-          & windeployqt --release --no-translations --no-system-d3d-compiler --no-opengl-sw "artifacts/MPQDraft-$date.exe"
+          & windeployqt --release --no-system-d3d-compiler --no-opengl-sw "artifacts/MPQDraft-$date.exe"
+
+          # Copy MPQDraft's own translation files
+          New-Item -ItemType Directory -Force -Path "artifacts/translations"
+          Copy-Item -Path "build/translations/*.qm" -Destination "artifacts/translations/" -ErrorAction SilentlyContinue
 
       # =========================================================================
       # Enigma Virtual Box - bundles all DLLs into a single executable
@@ -72,8 +76,22 @@ jobs:
         shell: pwsh
         run: |
           $evbUrl = "https://enigmaprotector.com/assets/files/enigmavb.exe"
-          Invoke-WebRequest -Uri $evbUrl -OutFile "enigmavb_setup.exe"
-          Start-Process -FilePath "enigmavb_setup.exe" -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART" -Wait
+          $maxRetries = 3
+          for ($i = 1; $i -le $maxRetries; $i++) {
+            Write-Host "Attempt $i of $maxRetries: downloading Enigma Virtual Box..."
+            Invoke-WebRequest -Uri $evbUrl -OutFile "enigmavb_setup.exe" -UseBasicParsing
+            $size = (Get-Item "enigmavb_setup.exe").Length
+            Write-Host "Downloaded file size: $size bytes"
+            if ($size -gt 1MB) {
+              Write-Host "Download OK, installing..."
+              break
+            }
+            Write-Host "File too small, retrying..."
+            Remove-Item "enigmavb_setup.exe" -Force -ErrorAction SilentlyContinue
+            if ($i -eq $maxRetries) { throw "Download failed after $maxRetries attempts" }
+            Start-Sleep -Seconds 5
+          }
+          Start-Process -FilePath ".\enigmavb_setup.exe" -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART" -Wait
 
       - name: Bundle into single executable
         shell: pwsh
