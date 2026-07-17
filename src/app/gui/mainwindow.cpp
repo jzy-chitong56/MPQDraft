@@ -125,42 +125,15 @@ void MainWindow::setupUI()
     centralWidget->setPalette(palette);
 
     // SEMPQ button (left button)
-    sempqButton = new QPushButton(centralWidget);
+    sempqButton = new QPushButton(tr("Create SEMPQ"), centralWidget);
     sempqButton->setGeometry(18, 226, 162, 33);
-    sempqButton->setFlat(true);
-    sempqButton->setStyleSheet("QPushButton { border: none; background: transparent; }");
-
-    // Load button images
-    QIcon sempqIcon;
-    sempqIcon.addPixmap(QPixmap(":/images/SEMPQButtonUp.png"), QIcon::Normal);
-    sempqIcon.addPixmap(QPixmap(":/images/SEMPQButtonDown.png"), QIcon::Active);
-    sempqIcon.addPixmap(QPixmap(":/images/SEMPQButtonDown.png"), QIcon::Selected);
-    sempqButton->setIcon(sempqIcon);
-    sempqButton->setIconSize(QSize(162, 33));
-
-    // Accessibility improvements
-    sempqButton->setAccessibleName(tr("Create SEMPQ"));
-    sempqButton->setAccessibleDescription(tr("Create a Self-Executing MPQ file"));
     sempqButton->setToolTip(tr("Create a Self-Executing MPQ file"));
 
     connect(sempqButton, &QPushButton::clicked, this, &MainWindow::onSEMPQClicked);
 
     // Patch button (right button)
-    patchButton = new QPushButton(centralWidget);
+    patchButton = new QPushButton(tr("Load MPQ Patch"), centralWidget);
     patchButton->setGeometry(240, 226, 162, 33);
-    patchButton->setFlat(true);
-    patchButton->setStyleSheet("QPushButton { border: none; background: transparent; }");
-
-    QIcon patchIcon;
-    patchIcon.addPixmap(QPixmap(":/images/PatchButtonUp.png"), QIcon::Normal);
-    patchIcon.addPixmap(QPixmap(":/images/PatchButtonDown.png"), QIcon::Active);
-    patchIcon.addPixmap(QPixmap(":/images/PatchButtonDown.png"), QIcon::Selected);
-    patchButton->setIcon(patchIcon);
-    patchButton->setIconSize(QSize(162, 33));
-
-    // Accessibility improvements
-    patchButton->setAccessibleName(tr("Load MPQ Patch"));
-    patchButton->setAccessibleDescription(tr("Launch a game with MPQ patches or plugins"));
     patchButton->setToolTip(tr("Launch a game with MPQ patches or plugins"));
 
     connect(patchButton, &QPushButton::clicked, this, &MainWindow::onPatchClicked);
