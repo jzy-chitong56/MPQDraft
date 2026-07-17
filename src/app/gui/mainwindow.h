@@ -11,6 +11,7 @@
 
 #include <QMainWindow>
 #include <QPushButton>
+#include <QActionGroup>
 
 class MainWindow : public QMainWindow
 {
@@ -25,13 +26,18 @@ protected:
 private slots:
     void onPatchClicked();
     void onSEMPQClicked();
+    void onLanguageChanged(QAction *action);
 
 private:
     void setupUI();
+    void setupMenuBar();
 
     // UI components
     QPushButton *patchButton;
     QPushButton *sempqButton;
+
+    // Language menu state
+    QActionGroup *languageGroup;
 };
 
 #endif // MAINWINDOW_H

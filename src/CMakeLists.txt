@@ -178,8 +178,29 @@ if(BUILD_GUI)
         qt5_add_translation(QM_FILES ${TS_FILES})
     endif()
 
+    # Generate a qrc file at build time that embeds all .qm files
+    # This is required because qt5_add_translation / qt6_add_translation
+    # do not embed the .qm files into the executable's resources on their own.
+    set(TRANSLATIONS_QRC "${CMAKE_CURRENT_BINARY_DIR}/translations_embedded.qrc")
+    file(WRITE ${TRANSLATIONS_QRC}
+        "<!DOCTYPE RCC>\n"
+        "<RCC version=\"1.0\">\n"
+        "    <qresource prefix=\"/translations\">\n"
+    )
+    foreach(QM_FILE ${QM_FILES})
+        get_filename_component(QM_NAME ${QM_FILE} NAME)
+        file(APPEND ${TRANSLATIONS_QRC} "        <file>${QM_NAME}</file>\n")
+    endforeach()
+    file(APPEND ${TRANSLATIONS_QRC} "    </qresource>\n</RCC>\n")
+
+    if(Qt6_FOUND)
+        qt6_add_resources(MPQDraft_TRANSLATIONS_QRC ${TRANSLATIONS_QRC})
+    else()
+        qt5_add_resources(MPQDraft_TRANSLATIONS_QRC ${TRANSLATIONS_QRC})
+    endif()
+
     # Add translations to the target
-    target_sources(MPQDraft PRIVATE ${QM_FILES})
+    target_sources(MPQDraft PRIVATE ${MPQDraft_TRANSLATIONS_QRC})
 
     # Install translation files
     install(FILES ${QM_FILES} DESTINATION translations)

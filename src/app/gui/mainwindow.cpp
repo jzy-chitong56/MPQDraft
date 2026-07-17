@@ -16,10 +16,19 @@
 #include <QFont>
 #include <QMessageBox>
 #include <QKeyEvent>
+#include <QMenuBar>
+#include <QMenu>
+#include <QAction>
+#include <QSettings>
+#include <QApplication>
+#include <QLocale>
+#include <QProcess>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
+    : QMainWindow(parent),
+      languageGroup(nullptr)
 {
+    setupMenuBar();
     setupUI();
 }
 
@@ -34,6 +43,70 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     } else {
         QMainWindow::keyPressEvent(event);
     }
+}
+
+void MainWindow::setupMenuBar()
+{
+    QMenuBar *menuBar = new QMenuBar(this);
+    setMenuBar(menuBar);
+
+    // Language menu
+    QMenu *langMenu = menuBar->addMenu(tr("&Language"));
+
+    languageGroup = new QActionGroup(this);
+    languageGroup->setExclusive(true);
+
+    struct LangEntry {
+        QString code;
+        QString label;
+    };
+    const QList<LangEntry> languages = {
+        {QStringLiteral("en"),     tr("&English")},
+        {QStringLiteral("zh_CN"),  tr("&Chinese (Simplified)")},
+        {QStringLiteral("ko_KR"),  tr("&Korean")},
+        {QStringLiteral("sv_SE"),  tr("S&wedish")},
+    };
+
+    QSettings settings;
+    const QString currentOverride = settings.value("language/override", QString()).toString();
+    const QString systemName = QLocale::system().name();
+    const QString effective = !currentOverride.isEmpty() ? currentOverride : systemName;
+
+    for (const LangEntry &lang : languages) {
+        QAction *act = langMenu->addAction(lang.label);
+        act->setCheckable(true);
+        act->setData(lang.code);
+        languageGroup->addAction(act);
+
+        if (effective == lang.code || (currentOverride.isEmpty() && systemName == lang.code)) {
+            act->setChecked(true);
+        }
+    }
+    // Default selection: English
+    if (languageGroup->checkedAction() == nullptr) {
+        for (QAction *a : languageGroup->actions()) {
+            if (a->data().toString() == "en") {
+                a->setChecked(true);
+                break;
+            }
+        }
+    }
+
+    connect(languageGroup, &QActionGroup::triggered,
+            this, &MainWindow::onLanguageChanged);
+}
+
+void MainWindow::onLanguageChanged(QAction *action)
+{
+    if (!action) return;
+    const QString code = action->data().toString();
+    QSettings settings;
+    settings.setValue("language/override", code);
+
+    QMessageBox::information(this,
+        tr("Language Changed"),
+        tr("The language change will take effect after restarting the application.\n\n"
+           "Selected: %1").arg(action->text().remove('&')));
 }
 
 void MainWindow::setupUI()
