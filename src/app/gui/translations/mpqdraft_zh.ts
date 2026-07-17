@@ -37,7 +37,7 @@
     </message>
     <message>
         <source>You have MPQ files in the list, but none are selected (checked). Do you want to proceed without any MPQ files?</source>
-        <translation>列表中有 MPQ 文件，但没有勾选任何文件。是否要在不加载 MPQ 文件的情况下继续？</translation>
+        <translation>未加载列表中的 MPQ 文件，是否继续？</translation>
     </message>
     <message>
         <source>File does not exist</source>
@@ -45,7 +45,7 @@
     </message>
     <message>
         <source>&lt;font color=&apos;#d32f2f&apos;&gt;&lt;b&gt;Warning:&lt;/b&gt; Too many MPQ files selected (%1/%2). Please uncheck some files.&lt;/font&gt;</source>
-        <translation>&lt;font color=&apos;#d32f2f&apos;&gt;&lt;b&gt;警告：&lt;/b&gt;选择的 MPQ 文件过多（%1/%2）。请取消勾选部分文件。&lt;/font&gt;</translation>
+        <translation>&lt;font color=&apos;#d32f2f&apos;&gt;&lt;b&gt;警告：&lt;/b&gt;选择的 MPQ 文件过多（%1/%2）。请取消部分选择。&lt;/font&gt;</translation>
     </message>
     <message>
         <source>&lt;font color=&apos;#d32f2f&apos;&gt;&lt;b&gt;Warning:&lt;/b&gt; Some MPQ files do not exist: %1&lt;/font&gt;</source>
@@ -53,7 +53,7 @@
     </message>
     <message>
         <source>MPQ Archives (*.mpq);;All Files (*.*)</source>
-        <translation>MPQ 归档文件 (*.mpq);;所有文件 (*.*)</translation>
+        <translation>MPQ 文件 (*.mpq);;所有文件 (*.*)</translation>
     </message>
     <message>
         <source>Select Folder Containing MPQ Files</source>
@@ -76,11 +76,11 @@
     </message>
     <message>
         <source>Load MPQ Patch</source>
-        <translation>加载 MPQ 补丁</translation>
+        <translation>加载 MPQ 文件</translation>
     </message>
     <message>
         <source>Launch a game with MPQ patches or plugins</source>
-        <translation>使用 MPQ 补丁或插件启动游戏</translation>
+        <translation>使用 MPQ 或插件启动游戏</translation>
     </message>
 </context>
 <context>
@@ -91,11 +91,11 @@
     </message>
     <message>
         <source>Load custom MPQ archives with game data, or use plugins to add new features.</source>
-        <translation>加载包含游戏数据的自定义 MPQ 归档，或使用插件添加新功能。</translation>
+        <translation>加载包含游戏数据的自定义 MPQ 文件，或使用插件添加新功能。</translation>
     </message>
     <message>
         <source>&lt;p&gt;Follow these steps to patch a game executable with custom MPQ archives (allowing you to change game assets), and plugins (allowing you to change game behavior).&lt;/p&gt;&lt;p&gt;&lt;b&gt;What are MPQs?&lt;/b&gt;&lt;br&gt;MPQs are archives containing game data such as graphics, sounds and other resources. They were used extensively by Blizzard Entertainment, but also Sierra OnLine&apos;s Lords of Magic.&lt;/p&gt;&lt;p&gt;&lt;b&gt;What is MPQDraft?&lt;/b&gt;&lt;br&gt;MPQDraft allows you to modify games by loading custom MPQ files and plugins without permanently modifying the game installation.&lt;/p&gt;&lt;p&gt;&lt;b&gt;What you can do:&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Load custom graphics, sounds, and other game data from MPQ files provided by you.&lt;/li&gt;&lt;li&gt;Enable plugins that add new features or modify game behavior.&lt;/li&gt;&lt;li&gt;Launch the game with your modifications applied temporarily.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;b&gt;How it works:&lt;/b&gt;&lt;br&gt;MPQDraft intercepts the game&apos;s file access and redirects it to your custom MPQ files, allowing you to run modifications without altering the original game files.&lt;/p&gt;&lt;p&gt;Click &lt;b&gt;Next&lt;/b&gt; to begin selecting your target game and MPQ files.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;按照以下步骤使用自定义 MPQ 归档（可更改游戏资源）和插件（可更改游戏行为）来补丁游戏可执行文件。&lt;/p&gt;&lt;p&gt;&lt;b&gt;什么是 MPQ？&lt;/b&gt;&lt;br&gt;MPQ 是包含游戏数据（如图形、声音和其他资源）的归档文件。暴雪娱乐（Blizzard Entertainment）广泛使用了这种格式，Sierra OnLine 的《魔法大帝》（Lords of Magic）也使用了该格式。&lt;/p&gt;&lt;p&gt;&lt;b&gt;什么是 MPQDraft？&lt;/b&gt;&lt;br&gt;MPQDraft 允许您通过加载自定义 MPQ 文件和插件来修改游戏，而无需永久修改游戏安装。&lt;/p&gt;&lt;p&gt;&lt;b&gt;您可以：&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;从您提供的 MPQ 文件中加载自定义图形、声音和其他游戏数据。&lt;/li&gt;&lt;li&gt;启用添加新功能或修改游戏行为的插件。&lt;/li&gt;&lt;li&gt;在临时应用修改的情况下启动游戏。&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;b&gt;工作原理：&lt;/b&gt;&lt;br&gt;MPQDraft 拦截游戏的文件访问并将其重定向到您的自定义 MPQ 文件，使您可以在不更改原始游戏文件的情况下运行修改。&lt;/p&gt;&lt;p&gt;单击&lt;b&gt;下一步&lt;/b&gt;开始选择目标游戏和 MPQ 文件。&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;按照以下步骤使用自定义 MPQ 文件（可更改游戏资源）和插件（可更改游戏行为）来制作游戏可执行文件。&lt;/p&gt;&lt;p&gt;&lt;b&gt;什么是 MPQ？&lt;/b&gt;&lt;br&gt;MPQ 是包含游戏数据（如图形、声音和其他资源）的归档文件。暴雪娱乐（Blizzard Entertainment）早期广泛使用了该格式，Sierra OnLine 的《魔法大帝》（Lords of Magic）也使用了该格式。&lt;/p&gt;&lt;p&gt;&lt;b&gt;什么是 MPQDraft？&lt;/b&gt;&lt;br&gt;MPQDraft 允许您通过加载自定义 MPQ 文件和插件来临时影响游戏，而无需修改游戏文件本身。&lt;/p&gt;&lt;p&gt;&lt;b&gt;您可以：&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;从您提供的 MPQ 文件中加载自定义图形、声音和其他游戏数据。&lt;/li&gt;&lt;li&gt;启用添加新功能或修改游戏行为的插件。&lt;/li&gt;&lt;li&gt;应用临时修改以启动游戏。&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;b&gt;工作原理：&lt;/b&gt;&lt;br&gt;MPQDraft 拦截游戏文件访问并将其重定向到您的自定义 MPQ 文件，使您可以在不更改原始游戏文件的情况下运行修改。&lt;/p&gt;&lt;p&gt;单击&lt;b&gt;下一步&lt;/b&gt;开始选择目标游戏和 MPQ 文件。&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -110,25 +110,25 @@
     </message>
     <message>
         <source>Failed to extract patcher DLL</source>
-        <translation>提取补丁程序 DLL 失败</translation>
+        <translation>程序 DLL 提取失败</translation>
     </message>
     <message>
         <source>Failed to load patcher DLL: %1</source>
-        <translation>加载补丁程序 DLL 失败：%1</translation>
+        <translation>程序 DLL 加载失败：%1</translation>
     </message>
     <message>
         <source>Failed to get MPQDraftPatcher function</source>
-        <translation>获取 MPQDraftPatcher 函数失败</translation>
+        <translation>MPQDraftPatcher 获取函数失败</translation>
     </message>
     <message>
         <source>Failed to load plugin: %1
 %2</source>
-        <translation>加载插件失败：%1
+        <translation>插件加载失败：%1
 %2</translation>
     </message>
     <message>
         <source>Failed to get plugin info for: %1</source>
-        <translation>获取以下插件的信息失败：%1</translation>
+        <translation>以下插件信息获取失败：%1</translation>
     </message>
     <message>
         <source>MPQDraftPatcher failed</source>
@@ -143,7 +143,7 @@
     </message>
     <message>
         <source>Choose plugins to load. Plugins can add custom patching functionality.</source>
-        <translation>选择要加载的插件。插件可以添加自定义补丁功能。</translation>
+        <translation>选择要加载的插件。插件可以添加自定义功能。</translation>
     </message>
     <message>
         <source>Add &amp;Plugin...</source>
@@ -187,14 +187,14 @@
     </message>
     <message>
         <source>Failed to Load Plugin</source>
-        <translation>加载插件失败</translation>
+        <translation>插件加载失败</translation>
     </message>
     <message>
         <source>Failed to load plugin from:
 %1
 
 %2</source>
-        <translation>从以下位置加载插件失败：
+        <translation>从以下位置插件加载失败：
 %1
 
 %2</translation>
@@ -237,7 +237,7 @@ File: %1</source>
     </message>
     <message>
         <source>No MPQ specified. At least one MPQ or one plugin must be selected.</source>
-        <translation>未指定 MPQ。必须至少选择一个 MPQ 或一个插件。</translation>
+        <translation>未指定 MPQ。必须至少选择一个 MPQ 或插件。</translation>
     </message>
 </context>
 <context>
@@ -252,7 +252,7 @@ File: %1</source>
     </message>
     <message>
         <source>&lt;p&gt;Follow these steps to create a Self-Executing MPQ (SEMPQ) file.&lt;/p&gt;&lt;p&gt;&lt;b&gt;What are MPQs?&lt;/b&gt;&lt;br&gt;MPQs are archives containing game data such as graphics, sounds and other resources. They were used extensively by Blizzard Entertainment, but also Sierra OnLine&apos;s Lords of Magic.&lt;/p&gt;&lt;p&gt;&lt;b&gt;What is a SEMPQ?&lt;/b&gt;&lt;br&gt;A SEMPQ is a standalone executable that can contain an MPQ archive and/or plugins. When run, it automatically patches and launches a game with the embedded modifications. The user does not need to have MPQDraft installed to run a SEMPQ.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Benefits of SEMPQ files:&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Easy distribution - share a single .exe file with others.&lt;/li&gt;&lt;li&gt;No installation required - recipients just run the file.&lt;/li&gt;&lt;li&gt;Automatic patching - the game is patched and launched in one step.&lt;/li&gt;&lt;li&gt;Self-contained - includes all necessary MPQ data and/or plugins.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Click &lt;b&gt;Next&lt;/b&gt; to configure your SEMPQ file.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;按照以下步骤创建自执行 MPQ（SEMPQ）文件。&lt;/p&gt;&lt;p&gt;&lt;b&gt;什么是 MPQ？&lt;/b&gt;&lt;br&gt;MPQ 是包含游戏数据（如图形、声音和其他资源）的归档文件。暴雪娱乐（Blizzard Entertainment）广泛使用了这种格式，Sierra OnLine 的《魔法大帝》（Lords of Magic）也使用了该格式。&lt;/p&gt;&lt;p&gt;&lt;b&gt;什么是 SEMPQ？&lt;/b&gt;&lt;br&gt;SEMPQ 是一个独立的可执行文件，可以包含 MPQ 归档和/或插件。运行时，它会自动使用嵌入的修改补丁并启动游戏。用户无需安装 MPQDraft 即可运行 SEMPQ。&lt;/p&gt;&lt;p&gt;&lt;b&gt;SEMPQ 文件的优势：&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;易于分发 — 与他人共享单个 .exe 文件即可。&lt;/li&gt;&lt;li&gt;无需安装 — 接收者只需运行文件即可。&lt;/li&gt;&lt;li&gt;自动补丁 — 游戏补丁和启动一步完成。&lt;/li&gt;&lt;li&gt;自包含 — 包含所有必要的 MPQ 数据和/或插件。&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;单击&lt;b&gt;下一步&lt;/b&gt;配置您的 SEMPQ 文件。&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;按照以下步骤创建自执行 MPQ（SEMPQ）文件。&lt;/p&gt;&lt;p&gt;&lt;b&gt;什么是 MPQ？&lt;/b&gt;&lt;br&gt;MPQ 是包含游戏数据（如图形、声音和其他资源）的文件。暴雪娱乐（Blizzard Entertainment）在其广泛使用了该格式，Sierra OnLine 的《魔法大帝》（Lords of Magic）也使用了该格式。&lt;/p&gt;&lt;p&gt;&lt;b&gt;什么是 SEMPQ？&lt;/b&gt;&lt;br&gt;SEMPQ 是一个独立的可执行文件，可以包含 MPQ 与/或 插件。运行时，它会自动使用嵌入的修改补丁并启动游戏。用户无需安装 MPQDraft 即可运行 SEMPQ。&lt;/p&gt;&lt;p&gt;&lt;b&gt;SEMPQ 文件的优势：&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;易于分发 — 与他人共享一个 .exe 文件即可。&lt;/li&gt;&lt;li&gt;无需安装 — 接收者只需运行文件即可。&lt;/li&gt;&lt;li&gt;自动补丁 — 游戏补丁和启动一步完成。&lt;/li&gt;&lt;li&gt;自包含 — 包含所有必要的 MPQ 数据 与/或 插件。&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;单击&lt;b&gt;下一步&lt;/b&gt;配置您的 SEMPQ 文件。&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -356,11 +356,11 @@ File: %1</source>
     </message>
     <message>
         <source>e.g., My Mod</source>
-        <translation>例如：我的模组</translation>
+        <translation>例：My Mod</translation>
     </message>
     <message>
         <source>Where to save the SEMPQ file</source>
-        <translation>SEMPQ 文件的保存位置</translation>
+        <translation>SEMPQ 文件保存位置</translation>
     </message>
     <message>
         <source>Select an icon file (.ico)</source>
@@ -372,7 +372,7 @@ File: %1</source>
     </message>
     <message>
         <source>Path is not a file</source>
-        <translation>路径不是文件</translation>
+        <translation>需指定路径，而非文件</translation>
     </message>
     <message>
         <source>Select MPQ File</source>
@@ -380,7 +380,7 @@ File: %1</source>
     </message>
     <message>
         <source>MPQ Archives (*.mpq);;All Files (*.*)</source>
-        <translation>MPQ 归档文件 (*.mpq);;所有文件 (*.*)</translation>
+        <translation>MPQ 文件 (*.mpq);;所有文件 (*.*)</translation>
     </message>
     <message>
         <source>Save SEMPQ File As</source>
@@ -400,7 +400,7 @@ File: %1</source>
     </message>
     <message>
         <source>File is not a valid icon</source>
-        <translation>文件不是有效的图标</translation>
+        <translation>图标文件无效</translation>
     </message>
     <message>
         <source>Warning: File already exists and will be overwritten</source>
@@ -440,7 +440,7 @@ File: %1</source>
     </message>
     <message>
         <source>Do you want to overwrite it?</source>
-        <translation>是否要覆盖它？</translation>
+        <translation>是否覆盖？</translation>
     </message>
 </context>
 <context>
@@ -467,11 +467,11 @@ File: %1</source>
     </message>
     <message>
         <source>Select a supported game from the list below. The SEMPQ will automatically locate the game on the user&apos;s computer using the Windows registry, making it portable across different machines.</source>
-        <translation>从下面的列表中选择一个支持的游戏。SEMPQ 将使用 Windows 注册表自动在用户计算机上定位游戏，使其可以在不同机器上移植使用。</translation>
+        <translation>从列表中选择一个游戏。SEMPQ 将使用 Windows 注册表自动在用户计算机上定位游戏，使其可以在不同计算机上使用。</translation>
     </message>
     <message>
         <source>If the game you want to target is not in the list of Supported Games, you can specify here the Windows registry data for how to find it, along with other settings. If this is correctly configured, the SEMPQ will work on any computer where the game is properly installed.&lt;br&gt;&lt;br&gt;By selecting a game in the Supported Games tab, you will see below its value for each field. Use the Paste button next to the field to fill in the value from the selected game.</source>
-        <translation>如果您要定位的游戏不在支持的游戏列表中，您可以在此处指定 Windows 注册表数据以及其他设置来查找它。如果配置正确，SEMPQ 将在任何正确安装了游戏的计算机上运行。&lt;br&gt;&lt;br&gt;在「支持的游戏」选项卡中选择一个游戏后，您将在下方看到每个字段的值。使用字段旁边的粘贴按钮可以填入所选游戏的值。</translation>
+        <translation>如果您要定位的游戏不在列表中，您可以在此处指定 Windows 注册表数据以及其他设置来查找它。如果配置正确，SEMPQ 将在任何正确安装了游戏的计算机上运行。&lt;br&gt;&lt;br&gt;在「支持的游戏」选项卡中选择一个游戏后，您将在下方看到每个字段的值。使用字段旁边的粘贴按钮可以填入所选游戏的值。</translation>
     </message>
     <message>
         <source>Registry Key:</source>
@@ -535,7 +535,7 @@ File: %1</source>
     </message>
     <message>
         <source>&lt;b&gt;Advanced Flags:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;高级标志：&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;高级选项：&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Do not inject into child processes</source>
@@ -543,7 +543,7 @@ File: %1</source>
     </message>
     <message>
         <source>&lt;b&gt;Do Not Inject Into Child Processes (MPQD_NO_SPAWNING)&lt;/b&gt;&lt;br&gt;&lt;br&gt;By default, MPQDraft injects itself into any child processes created by the game. This ensures that patches work even if the game launches additional executables.&lt;br&gt;&lt;br&gt;&lt;b&gt;When to enable:&lt;/b&gt; Some games launch helper processes (updaters, launchers, crash reporters) that don&apos;t need patching and may cause issues if MPQDraft injects into them. Enable this flag to prevent injection into child processes.&lt;br&gt;&lt;br&gt;&lt;b&gt;When to disable (default):&lt;/b&gt; Most games work fine with child process injection, and some games require it for patches to work correctly.</source>
-        <translation>&lt;b&gt;不注入子进程（MPQD_NO_SPAWNING）&lt;/b&gt;&lt;br&gt;&lt;br&gt;默认情况下，MPQDraft 会将自身注入游戏创建的任何子进程中。这确保即使游戏启动其他可执行文件，补丁也能正常工作。&lt;br&gt;&lt;br&gt;&lt;b&gt;何时启用：&lt;/b&gt;某些游戏会启动不需要补丁的辅助进程（更新程序、启动器、崩溃报告器），如果 MPQDraft 注入这些进程可能会导致问题。启用此标志可防止注入子进程。&lt;br&gt;&lt;br&gt;&lt;b&gt;何时禁用（默认）：&lt;/b&gt;大多数游戏在子进程注入下都能正常工作，有些游戏需要它才能使补丁正常工作。</translation>
+        <translation>&lt;b&gt;不注入子进程（MPQD_NO_SPAWNING）&lt;/b&gt;&lt;br&gt;&lt;br&gt;默认情况下，MPQDraft 会将自身注入游戏创建的任何子进程中。这确保即使游戏启动其他可执行文件，补丁也能正常工作。&lt;br&gt;&lt;br&gt;&lt;b&gt;何时启用：&lt;/b&gt;某些游戏会启动不需要补丁的辅助进程（更新程序、启动器、崩溃报告器），如果 MPQDraft 注入这些进程可能会导致问题。启用此标志可防止注入子进程。&lt;br&gt;&lt;br&gt;&lt;b&gt;何时禁用（默认）：&lt;/b&gt;大多数游戏在子进程注入后都能正常工作，有些游戏需要它才能使补丁正常工作。</translation>
     </message>
     <message>
         <source>Use extended file redirection</source>
@@ -551,7 +551,7 @@ File: %1</source>
     </message>
     <message>
         <source>&lt;b&gt;Extended File Redirection (MPQD_EXTENDED_REDIR)&lt;/b&gt;&lt;br&gt;&lt;br&gt;Blizzard games use Storm.dll to access MPQ archives. Some Storm functions (like SFileOpenFileEx) can bypass the normal MPQ priority chain by accepting a specific archive handle.&lt;br&gt;&lt;br&gt;When enabled, MPQDraft hooks these functions to force them to search through the entire MPQ priority chain (including your custom MPQs), even when the game tries to read from a specific archive.&lt;br&gt;&lt;br&gt;&lt;b&gt;When to enable:&lt;/b&gt; Most Blizzard games including StarCraft and Warcraft III require this for mods to work correctly.&lt;br&gt;&lt;br&gt;&lt;b&gt;When to disable:&lt;/b&gt; Only disable if you&apos;re certain the target program doesn&apos;t use these Storm functions, or if you experience compatibility issues.</source>
-        <translation>&lt;b&gt;扩展文件重定向（MPQD_EXTENDED_REDIR）&lt;/b&gt;&lt;br&gt;&lt;br&gt;暴雪游戏使用 Storm.dll 访问 MPQ 归档。某些 Storm 函数（如 SFileOpenFileEx）可以通过接受特定的归档句柄来绕过正常的 MPQ 优先级链。&lt;br&gt;&lt;br&gt;启用后，MPQDraft 会挂钩这些函数，强制它们搜索整个 MPQ 优先级链（包括您的自定义 MPQ），即使游戏尝试从特定归档读取也是如此。&lt;br&gt;&lt;br&gt;&lt;b&gt;何时启用：&lt;/b&gt;包括星际争霸和魔兽争霸 III 在内的大多数暴雪游戏都需要此功能才能使模组正常工作。&lt;br&gt;&lt;br&gt;&lt;b&gt;何时禁用：&lt;/b&gt;仅当您确定目标程序不使用这些 Storm 函数，或者遇到兼容性问题时才禁用。</translation>
+        <translation>&lt;b&gt;扩展文件重定向（MPQD_EXTENDED_REDIR）&lt;/b&gt;&lt;br&gt;&lt;br&gt;暴雪游戏使用 Storm.dll 访问 MPQ 文件。某些 Storm 函数（如 SFileOpenFileEx）可以通过接受特定的句柄来绕过正常的 MPQ 优先级链。&lt;br&gt;&lt;br&gt;启用后，MPQDraft 会挂钩这些函数，强制它们搜索整个 MPQ 优先级链（包括您的自定义 MPQ），即使游戏尝试从特定文件读取也是如此。&lt;br&gt;&lt;br&gt;&lt;b&gt;何时启用：&lt;/b&gt;包括星际争霸和魔兽争霸 III 在内的大多数暴雪游戏都需要此功能才能使模组正常工作。&lt;br&gt;&lt;br&gt;&lt;b&gt;何时禁用：&lt;/b&gt;仅当您确定目标程序不使用这些 Storm 函数，或者遇到兼容性问题时才禁用。</translation>
     </message>
     <message>
         <source>Specify a custom program path. This can be used for programs not in the list in the Supported Games tab.</source>
@@ -571,7 +571,7 @@ File: %1</source>
     </message>
     <message>
         <source>Path is not a file</source>
-        <translation>路径不是文件</translation>
+        <translation>需指定路径，而非文件</translation>
     </message>
     <message>
         <source>Extended File Redirection</source>
@@ -579,7 +579,7 @@ File: %1</source>
     </message>
     <message>
         <source>It is highly recommended that you do not change &apos;Use extended file redirection&apos; unless you are completely sure what you are doing. Do you wish to continue?</source>
-        <translation>强烈建议您不要更改「使用扩展文件重定向」设置，除非您完全确定自己在做什么。是否继续？</translation>
+        <translation>强烈建议不要更改「使用扩展文件重定向」设置，除非您完全确定自己在做什么。是否继续？</translation>
     </message>
     <message>
         <source>Copy value from %1</source>
@@ -601,7 +601,7 @@ File: %1</source>
     </message>
     <message>
         <source>Choose the game executable to patch.</source>
-        <translation>选择要补丁的游戏可执行文件。</translation>
+        <translation>选择游戏可执行文件。</translation>
     </message>
     <message>
         <source>Detected &amp;Games</source>
@@ -633,7 +633,7 @@ File: %1</source>
     </message>
     <message>
         <source>The following games have been detected on your computer, based on the Windows Registry. Select a game from the list below, and MPQDraft will automatically use the correct settings.</source>
-        <translation>基于 Windows 注册表，已在您的计算机上检测到以下游戏。从下面的列表中选择一个游戏，MPQDraft 将自动使用正确的设置。</translation>
+        <translation>基于 Windows 注册表，已在您的计算机上检测到以下游戏。从列表中选择游戏，MPQDraft 将自动使用正确的设置。</translation>
     </message>
     <message>
         <source>Browse for an executable and configure patching options manually.</source>
@@ -657,7 +657,7 @@ File: %1</source>
     </message>
     <message>
         <source>&lt;b&gt;Extended File Redirection (MPQD_EXTENDED_REDIR)&lt;/b&gt;&lt;br&gt;&lt;br&gt;Blizzard games use Storm.dll to access MPQ archives. Some Storm functions (like SFileOpenFileEx) can bypass the normal MPQ priority chain by accepting a specific archive handle.&lt;br&gt;&lt;br&gt;When enabled, MPQDraft hooks these functions to force them to search through the entire MPQ priority chain (including your custom MPQs), even when the game tries to read from a specific archive.&lt;br&gt;&lt;br&gt;&lt;b&gt;When to enable:&lt;/b&gt; Most Blizzard games including StarCraft and Warcraft III require this for mods to work correctly.&lt;br&gt;&lt;br&gt;&lt;b&gt;When to disable:&lt;/b&gt; Only disable if you&apos;re certain the target program doesn&apos;t use these Storm functions, or if you experience compatibility issues.</source>
-        <translation>&lt;b&gt;扩展文件重定向（MPQD_EXTENDED_REDIR）&lt;/b&gt;&lt;br&gt;&lt;br&gt;暴雪游戏使用 Storm.dll 访问 MPQ 归档。某些 Storm 函数（如 SFileOpenFileEx）可以通过接受特定的归档句柄来绕过正常的 MPQ 优先级链。&lt;br&gt;&lt;br&gt;启用后，MPQDraft 会挂钩这些函数，强制它们搜索整个 MPQ 优先级链（包括您的自定义 MPQ），即使游戏尝试从特定归档读取也是如此。&lt;br&gt;&lt;br&gt;&lt;b&gt;何时启用：&lt;/b&gt;包括星际争霸和魔兽争霸 III 在内的大多数暴雪游戏都需要此功能才能使模组正常工作。&lt;br&gt;&lt;br&gt;&lt;b&gt;何时禁用：&lt;/b&gt;仅当您确定目标程序不使用这些 Storm 函数，或者遇到兼容性问题时才禁用。</translation>
+        <translation>&lt;b&gt;扩展文件重定向（MPQD_EXTENDED_REDIR）&lt;/b&gt;&lt;br&gt;&lt;br&gt;暴雪游戏使用 Storm.dll 访问 MPQ 文件。某些 Storm 函数（如 SFileOpenFileEx）可以通过接受特定的句柄来绕过正常的 MPQ 优先级链。&lt;br&gt;&lt;br&gt;启用后，MPQDraft 会挂钩这些函数，强制它们搜索整个 MPQ 优先级链（包括您的自定义 MPQ），即使游戏尝试从特定文件读取也是如此。&lt;br&gt;&lt;br&gt;&lt;b&gt;何时启用：&lt;/b&gt;包括星际争霸和魔兽争霸 III 在内的大多数暴雪游戏都需要此功能才能使模组正常工作。&lt;br&gt;&lt;br&gt;&lt;b&gt;何时禁用：&lt;/b&gt;仅当您确定目标程序不使用这些 Storm 函数，或者遇到兼容性问题时才禁用。</translation>
     </message>
     <message>
         <source>&lt;b&gt;Do Not Inject Into Child Processes (MPQD_NO_SPAWNING)&lt;/b&gt;&lt;br&gt;&lt;br&gt;By default, MPQDraft injects itself into any child processes created by the game. This ensures that patches work even if the game launches additional executables.&lt;br&gt;&lt;br&gt;&lt;b&gt;When to enable:&lt;/b&gt; Some games launch helper processes (updaters, launchers, crash reporters) that don&apos;t need patching and may cause issues if MPQDraft injects into them. Enable this flag to prevent injection into child processes.&lt;br&gt;&lt;br&gt;&lt;b&gt;When to disable (default):&lt;/b&gt; Most games work fine with child process injection, and some games require it for patches to work correctly.</source>
@@ -705,7 +705,7 @@ File: %1</source>
     </message>
     <message>
         <source>Images (*.png *.jpg *.jpeg *.bmp *.gif *.svg *.ico);;All Files (*.*)</source>
-        <translation>图像文件 (*.png *.jpg *.jpeg *.bmp *.gif *.svg *.ico);;所有文件 (*.*)</translation>
+        <translation>图片 (*.png *.jpg *.jpeg *.bmp *.gif *.svg *.ico);;所有文件 (*.*)</translation>
     </message>
     <message>
         <source>Application Saved</source>
@@ -713,7 +713,7 @@ File: %1</source>
     </message>
     <message>
         <source>&apos;%1&apos; has been saved successfully and added to the Detected Games list.</source>
-        <translation>&apos;%1&apos; 已成功保存并添加到检测到的游戏列表中。</translation>
+        <translation>&apos;%1&apos; 已成功保存并添加到游戏列表中。</translation>
     </message>
     <message>
         <source>File does not exist</source>
@@ -721,7 +721,7 @@ File: %1</source>
     </message>
     <message>
         <source>Path is not a file</source>
-        <translation>路径不是文件</translation>
+        <translation>需指定路径，而非文件</translation>
     </message>
     <message>
         <source>Executable not found - Right click to reset</source>
