@@ -32,23 +32,8 @@ static int runQtGuiCore(int argc, char *argv[])
     QApplication::setApplicationName("MPQDraft");
     QApplication::setApplicationVersion("1.0");
 
-    // Load Qt's built-in translations for standard dialogs (e.g., QFileDialog)
-    QTranslator qtTranslator;
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    if (qtTranslator.load(QLocale(), "qt", "_", QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
-#else
-    if (qtTranslator.load(QLocale(), "qt", "_", QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
-#endif
-        app.installTranslator(&qtTranslator);
-    }
-
     // ------------------------------------------------------------------------
-    // Load MPQDraft translations
-    //
-    // Resolution order:
-    //   1. User override saved in QSettings (e.g. "zh_CN", "ko_KR", "en")
-    //   2. System locale (full name like "zh_CN", then short "zh")
-    //   3. Several filesystem locations + the embedded :/translations resource
+    // Determine preferred language
     // ------------------------------------------------------------------------
     QSettings settings;
     const QString overrideLang = settings.value("language/override", QString()).toString();
@@ -81,12 +66,49 @@ static int runQtGuiCore(int argc, char *argv[])
         ":/translations"
     };
 
-    // App translator must live for the entire QApplication lifetime
+    // Also search Qt's own translations directory
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    const QString qtTransDir = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
+#else
+    const QString qtTransDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+#endif
+
+    // ------------------------------------------------------------------------
+    // Load Qt's built-in translations (QWizard buttons, standard dialogs, etc.)
+    // Try both "qtbase_" (Qt 5.15+ split) and "qt_" (legacy) prefixes.
+    // ------------------------------------------------------------------------
+    QTranslator qtTranslator;
+    for (const QString &lang : preferredLangs) {
+        if (lang == "en") break;   // English is built-in
+        for (const QString &prefix : {QStringLiteral("qtbase_"), QStringLiteral("qt_")}) {
+            const QString baseName = prefix + lang;
+            for (const QString &path : searchPaths) {
+                if (qtTranslator.load(baseName, path)) {
+                    app.installTranslator(&qtTranslator);
+                    qDebug() << "MPQDraft: loaded Qt translation" << baseName << "from" << path;
+                    goto qt_done;
+                }
+            }
+        }
+        // Also try Qt's own directory
+        for (const QString &prefix : {QStringLiteral("qtbase_"), QStringLiteral("qt_")}) {
+            const QString baseName = prefix + lang;
+            if (qtTranslator.load(baseName, qtTransDir)) {
+                app.installTranslator(&qtTranslator);
+                qDebug() << "MPQDraft: loaded Qt translation" << baseName << "from" << qtTransDir;
+                goto qt_done;
+            }
+        }
+    }
+qt_done:
+
+    // ------------------------------------------------------------------------
+    // Load MPQDraft translations
+    // ------------------------------------------------------------------------
     QTranslator appTranslator;
     bool translatorLoaded = false;
     for (const QString &lang : preferredLangs) {
         if (lang == "en") {
-            // English is the source language, no .qm needed
             qDebug() << "MPQDraft: using English (source) language";
             translatorLoaded = true;
             break;
