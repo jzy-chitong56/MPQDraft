@@ -112,7 +112,7 @@ void MainWindow::onLanguageChanged(QAction *action)
 void MainWindow::setupUI()
 {
     setWindowTitle(tr("MPQDraft"));
-    setFixedSize(420, 273);
+    setFixedSize(420, 300);
 
     // Create central widget with background image
     QWidget *centralWidget = new QWidget(this);
