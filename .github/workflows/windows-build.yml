@@ -75,23 +75,30 @@ jobs:
       - name: Install Enigma Virtual Box
         shell: pwsh
         run: |
-          $evbUrl = "https://enigmaprotector.com/assets/files/enigmavb.exe"
-          $maxRetries = 3
-          for ($i = 1; $i -le $maxRetries; $i++) {
-            Write-Host ("Attempt {0} of {1}: downloading Enigma Virtual Box..." -f $i, $maxRetries)
-            Invoke-WebRequest -Uri $evbUrl -OutFile "enigmavb_setup.exe" -UseBasicParsing
-            $size = (Get-Item "enigmavb_setup.exe").Length
-            Write-Host ("Downloaded file size: {0} bytes" -f $size)
-            if ($size -gt 1MB) {
-              Write-Host "Download OK, installing..."
-              break
+          # Use winget (more reliable than direct download)
+          winget install --id Enigma.VirtualBox -e --accept-source-agreements --accept-package-agreements --silent
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host "winget failed, trying direct download as fallback..."
+            $evbUrl = "https://enigmaprotector.com/en/downloads.html"
+            # Try alternate direct URL
+            $altUrl = "https://enigmaprotector.com/assets/files/enigmavb.exe"
+            $maxRetries = 3
+            for ($i = 1; $i -le $maxRetries; $i++) {
+              Write-Host ("Attempt {0} of {1}: downloading Enigma Virtual Box..." -f $i, $maxRetries)
+              Invoke-WebRequest -Uri $altUrl -OutFile "enigmavb_setup.exe" -UseBasicParsing
+              $size = (Get-Item "enigmavb_setup.exe").Length
+              Write-Host ("Downloaded file size: {0} bytes" -f $size)
+              if ($size -gt 1MB) {
+                Write-Host "Download OK, installing..."
+                break
+              }
+              Write-Host "File too small, retrying..."
+              Remove-Item "enigmavb_setup.exe" -Force -ErrorAction SilentlyContinue
+              if ($i -eq $maxRetries) { throw ("Download failed after {0} attempts" -f $maxRetries) }
+              Start-Sleep -Seconds 5
             }
-            Write-Host "File too small, retrying..."
-            Remove-Item "enigmavb_setup.exe" -Force -ErrorAction SilentlyContinue
-            if ($i -eq $maxRetries) { throw ("Download failed after {0} attempts" -f $maxRetries) }
-            Start-Sleep -Seconds 5
+            Start-Process -FilePath ".\enigmavb_setup.exe" -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART" -Wait
           }
-          Start-Process -FilePath ".\enigmavb_setup.exe" -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART" -Wait
 
       - name: Bundle into single executable
         shell: pwsh
