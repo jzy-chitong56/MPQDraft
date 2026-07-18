@@ -519,11 +519,11 @@ File: %1</source>
     </message>
     <message>
         <source>Shunt Count:</source>
-        <translation>分流计数：</translation>
+        <translation>重启次数：</translation>
     </message>
     <message>
         <source>&lt;b&gt;Shunt Count&lt;/b&gt;&lt;br&gt;&lt;br&gt;The number of times the game restarts itself before MPQDraft activates patching.&lt;br&gt;&lt;br&gt;&lt;b&gt;0 (default):&lt;/b&gt; Activate immediately when the game starts. Use this for most games.&lt;br&gt;&lt;br&gt;&lt;b&gt;1:&lt;/b&gt; Wait for the game to restart itself once before activating. Some games with copy protection (like Diablo) restart themselves after checking the CD, so MPQDraft needs to wait for this restart.&lt;br&gt;&lt;br&gt;&lt;b&gt;Higher values:&lt;/b&gt; Rarely needed, but available if a game restarts multiple times during its startup sequence.</source>
-        <translation>&lt;b&gt;分流计数&lt;/b&gt;&lt;br&gt;&lt;br&gt;MPQDraft 激活补丁之前游戏自行重启的次数。&lt;br&gt;&lt;br&gt;&lt;b&gt;0（默认）：&lt;/b&gt;游戏启动时立即激活。适用于大多数游戏。&lt;br&gt;&lt;br&gt;&lt;b&gt;1：&lt;/b&gt;等待游戏自行重启一次后再激活。某些带有复制保护的游戏（如暗黑破坏神）在检查 CD 后会自行重启，因此 MPQDraft 需要等待这次重启。&lt;br&gt;&lt;br&gt;&lt;b&gt;更高的值：&lt;/b&gt;很少需要，但如果游戏在启动序列中多次重启，则可以使用。</translation>
+        <translation>&lt;b&gt;重启次数&lt;/b&gt;&lt;br&gt;&lt;br&gt;MPQDraft 激活补丁之前游戏自行重启的次数。&lt;br&gt;&lt;br&gt;&lt;b&gt;0（默认）：&lt;/b&gt;游戏启动时立即激活。适用于大多数游戏。&lt;br&gt;&lt;br&gt;&lt;b&gt;1：&lt;/b&gt;等待游戏自行重启一次后再激活。某些带有复制保护的游戏（如暗黑破坏神）在检查 CD 后会自行重启，因此 MPQDraft 需要等待这次重启。&lt;br&gt;&lt;br&gt;&lt;b&gt;更高的值：&lt;/b&gt;很少需要，但如果游戏在启动序列中多次重启，则可以使用。</translation>
     </message>
     <message>
         <source>Command-Line Parameters (optional):</source>
@@ -665,11 +665,11 @@ File: %1</source>
     </message>
     <message>
         <source>&lt;b&gt;Shunt Count:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;分流计数：&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;重启次数：&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Shunt Count&lt;/b&gt;&lt;br&gt;&lt;br&gt;The number of times the game restarts itself before MPQDraft activates patching.&lt;br&gt;&lt;br&gt;&lt;b&gt;0 (default):&lt;/b&gt; Activate immediately when the game starts. Use this for most games.&lt;br&gt;&lt;br&gt;&lt;b&gt;1:&lt;/b&gt; Wait for the game to restart itself once before activating. Some games with copy protection (like Diablo) restart themselves after checking the CD, so MPQDraft needs to wait for this restart.&lt;br&gt;&lt;br&gt;&lt;b&gt;Higher values:&lt;/b&gt; Rarely needed, but available if a game restarts multiple times during its startup sequence.</source>
-        <translation>&lt;b&gt;分流计数&lt;/b&gt;&lt;br&gt;&lt;br&gt;MPQDraft 激活补丁之前游戏自行重启的次数。&lt;br&gt;&lt;br&gt;&lt;b&gt;0（默认）：&lt;/b&gt;游戏启动时立即激活。适用于大多数游戏。&lt;br&gt;&lt;br&gt;&lt;b&gt;1：&lt;/b&gt;等待游戏自行重启一次后再激活。某些带有复制保护的游戏（如暗黑破坏神）在检查 CD 后会自行重启，因此 MPQDraft 需要等待这次重启。&lt;br&gt;&lt;br&gt;&lt;b&gt;更高的值：&lt;/b&gt;很少需要，但如果游戏在启动序列中多次重启，则可以使用。</translation>
+        <translation>&lt;b&gt;重启次数&lt;/b&gt;&lt;br&gt;&lt;br&gt;MPQDraft 激活补丁之前游戏自行重启的次数。&lt;br&gt;&lt;br&gt;&lt;b&gt;0（默认）：&lt;/b&gt;游戏启动时立即激活。适用于大多数游戏。&lt;br&gt;&lt;br&gt;&lt;b&gt;1：&lt;/b&gt;等待游戏自行重启一次后再激活。某些带有复制保护的游戏（如暗黑破坏神）在检查 CD 后会自行重启，因此 MPQDraft 需要等待这次重启。&lt;br&gt;&lt;br&gt;&lt;b&gt;更高的值：&lt;/b&gt;很少需要，但如果游戏在启动序列中多次重启，则可以使用。</translation>
     </message>
     <message>
         <source>&amp;Remember Application</source>
