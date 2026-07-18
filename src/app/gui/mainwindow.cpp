@@ -126,6 +126,27 @@ void MainWindow::setupUI()
     sempqButton = new QPushButton(tr("Create SEMPQ"), centralWidget);
     sempqButton->setGeometry(18, 226, 162, 33);
     sempqButton->setToolTip(tr("Create a Self-Executing MPQ file"));
+    sempqButton->setStyleSheet(
+        "QPushButton {"
+        "    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+        "        stop:0 #3a3a3a, stop:0.5 #2a2a2a, stop:1 #1a1a1a);"
+        "    border: 2px solid #555555;"
+        "    border-radius: 2px;"
+        "    color: #ffffff;"
+        "    font-weight: bold;"
+        "    font-size: 11px;"
+        "    text-shadow: 0 0 2px #000000, 0 0 4px #000000;"
+        "    padding: 3px;"
+        "}"
+        "QPushButton:hover {"
+        "    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+        "        stop:0 #4a4a4a, stop:0.5 #3a3a3a, stop:1 #2a2a2a);"
+        "}"
+        "QPushButton:pressed {"
+        "    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+        "        stop:0 #1a1a1a, stop:0.5 #2a2a2a, stop:1 #3a3a3a);"
+        "}"
+    );
 
     connect(sempqButton, &QPushButton::clicked, this, &MainWindow::onSEMPQClicked);
 
@@ -133,6 +154,27 @@ void MainWindow::setupUI()
     patchButton = new QPushButton(tr("Load MPQ Patch"), centralWidget);
     patchButton->setGeometry(240, 226, 162, 33);
     patchButton->setToolTip(tr("Launch a game with MPQ patches or plugins"));
+    patchButton->setStyleSheet(
+        "QPushButton {"
+        "    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+        "        stop:0 #3a3a3a, stop:0.5 #2a2a2a, stop:1 #1a1a1a);"
+        "    border: 2px solid #555555;"
+        "    border-radius: 2px;"
+        "    color: #ffffff;"
+        "    font-weight: bold;"
+        "    font-size: 11px;"
+        "    text-shadow: 0 0 2px #000000, 0 0 4px #000000;"
+        "    padding: 3px;"
+        "}"
+        "QPushButton:hover {"
+        "    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+        "        stop:0 #4a4a4a, stop:0.5 #3a3a3a, stop:1 #2a2a2a);"
+        "}"
+        "QPushButton:pressed {"
+        "    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+        "        stop:0 #1a1a1a, stop:0.5 #2a2a2a, stop:1 #3a3a3a);"
+        "}"
+    );
 
     connect(patchButton, &QPushButton::clicked, this, &MainWindow::onPatchClicked);
 
